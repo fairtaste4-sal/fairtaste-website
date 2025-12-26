@@ -3,107 +3,316 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fair Taste - Premium Bakery Manufacturer in Ambedkar Nagar. Wholesaler of Bread, Cookies, and Rusk.">
   <title>Fair Taste | Premium Bakery Manufacturer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+
   <style>
-        /* CSS Styles */
+        /* --- 1. CONFIGURATION --- */
+        :root {
+            --primary: #8B4513;        /* Saddle Brown */
+            --primary-dark: #5e2c0b;
+            --accent: #D2691E;         /* Chocolate */
+            --bg-body: #FFFBF2;        /* Warm Cream */
+            --bg-card: #FFFFFF;
+            --text-main: #2d2d2d;
+            --text-light: #666666;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        /* --- 2. GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f1e5; /* Bakery Cream Color */
-            color: #333;
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        .container {
-            max-width: 900px;
-            margin: 60px auto;
-            background: #fff;
-            padding: 50px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-radius: 12px;
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+
+        /* --- 3. TYPOGRAPHY --- */
+        h1, h2, h3 { font-family: 'Poppins', sans-serif; color: var(--primary); }
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; font-weight: 700; }
+        h2 { font-size: 2.2rem; margin-bottom: 1rem; text-align: center; }
+        p { margin-bottom: 1rem; }
+
+        /* --- 4. NAVIGATION --- */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 0.8rem 5%;
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
+
+        .btn-toggle {
+            padding: 8px 16px;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            color: var(--primary);
+            font-weight: 700;
+            background: transparent;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-toggle:hover { background: var(--primary); color: white; }
+
+        /* --- 5. HERO SECTION --- */
+        .hero {
+            position: relative;
+            padding: 8rem 5% 6rem;
             text-align: center;
-            border-top: 6px solid #8b4513; /* Chocolate Brown border */
+            background: radial-gradient(circle at center, rgba(210, 105, 30, 0.1), transparent);
         }
-        h1 {
-            color: #8b4513;
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-        p.tagline {
-            font-size: 1.4rem;
-            color: #666;
-            margin-bottom: 40px;
-            font-style: italic;
-        }
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            text-align: left;
-            margin-top: 30px;
-            background: #fafafa;
-            padding: 30px;
-            border-radius: 8px;
-            border: 1px solid #eee;
-        }
-        .info-item {
-            font-size: 1.2rem;
-            border-bottom: 1px dashed #ddd;
-            padding-bottom: 10px;
-        }
-        .info-item:last-child {
-            border-bottom: none;
-        }
-        .label {
-            font-weight: bold;
-            color: #8b4513;
-            width: 120px;
+        .hero p { font-size: 1.25rem; color: var(--text-light); max-width: 600px; margin: 1rem auto 2rem; }
+        .btn-cta {
+            background-color: var(--accent);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(210, 105, 30, 0.3);
+            transition: var(--transition);
             display: inline-block;
         }
-        footer {
-            margin-top: 50px;
-            color: #888;
-            font-size: 0.9rem;
+        .btn-cta:hover { transform: translateY(-3px); background-color: var(--primary); box-shadow: 0 15px 25px rgba(139, 69, 19, 0.4); }
+
+        /* --- 6. PRODUCT GRID --- */
+        .products { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
+        .card img { width: 100%; height: 220px; object-fit: cover; }
+        .card-content { padding: 1.5rem; }
+        .card-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary); }
+        .tag { display: inline-block; font-size: 0.8rem; background: #fff3cd; color: #856404; padding: 2px 8px; border-radius: 4px; margin-bottom: 10px; }
+
+        /* --- 7. OWNER / ABOUT --- */
+        .about-section { background: white; padding: 5rem 5%; }
+        .about-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+        .owner-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid var(--bg-body);
+            box-shadow: var(--shadow);
+            flex-shrink: 0;
+        }
+
+        /* --- 8. FOOTER --- */
+        footer { background: #1a1a1a; color: #aaa; padding: 4rem 5%; text-align: center; font-size: 0.9rem; }
+        .footer-logo { font-size: 2rem; font-weight: 700; color: white; margin-bottom: 1rem; display: block; }
+        .gst-box { display: inline-block; border: 1px dashed #555; padding: 10px 20px; margin-top: 2rem; border-radius: 6px; }
+
+        /* --- 9. UTILITIES (LANGUAGE CONTROLS) --- */
+        /* MODIFICATION: English hidden by default */
+        .lang-en { display: none; }
+        .lang-hi { display: inline; }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .about-container { flex-direction: column; text-align: center; }
+            .owner-photo { width: 180px; height: 180px; margin: 0 auto; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>Fair Taste</h1>
-  <p class="tagline">Manufacturing Premium Bread & Cookies</p>
+<header>
+  <nav>
+    <div class="logo">Fair Taste</div>
+    <button class="btn-toggle" onclick="toggleLanguage()" aria-label="Switch Language">
+      <span class="lang-text">English</span>
+    </button>
+  </nav>
+</header>
 
-  <div class="info-grid">
-    <div class="info-item">
-      <span class="label">OWNER:</span>
-      <strong>DEVESH MISHRA</strong>
-    </div>
-  <div class="info-grid">
-    <div class="info-item">
-      <span class="label">GSTIN:</span>
-      <strong>1257PQR25</strong>
+<section class="hero">
+  <h1>
+    <span class="lang-en">Baking Traditions,<br>Modern Taste.</span>
+    <span class="lang-hi">परंपरा और स्वाद का<br>अनोखा संगम</span>
+  </h1>
+  <p>
+    <span class="lang-en">Premium Manufacturer of Bread, Cookies & Rusk in Ambedkar Nagar. Pure ingredients, pure love.</span>
+    <span class="lang-hi">अंबेडकर नगर में प्रीमियम ब्रेड, कुकीज़ और रस्क निर्माता। शुद्ध सामग्री, शुद्ध प्यार।</span>
+  </p>
+  <a href="#contact" class="btn-cta">
+    <span class="lang-en">Order Wholesale</span>
+    <span class="lang-hi">थोक ऑर्डर करें</span>
+  </a>
+</section>
+
+<section class="products">
+  <h2>
+    <span class="lang-en">Our Signature Products</span>
+    <span class="lang-hi">हमारे विशेष उत्पाद</span>
+  </h2>
+  <div class="grid">
+    <div class="card">
+      <img src="white_bread.jpg" alt="Bread">
+      <div class="card-content">
+        <span class="tag">Daily Fresh</span>
+        <div class="card-title">
+          <span class="lang-en">Premium White Bread</span>
+          <span class="lang-hi">प्रीमियम व्हाइट ब्रेड</span>
+        </div>
+        <p class="lang-en">Soft, fluffy, and perfect for your morning breakfast.</p>
+        <p class="lang-hi">मुलायम और ताज़ा, आपके सुबह के नाश्ते के लिए एकदम सही।</p>
+      </div>
     </div>
 
-    <div class="info-item">
-      <span class="label">Address:</span>
-      Semara, Ambedkar Nagar, 224137
+    <div class="card">
+      <img src="butter_cookies.jpg" alt="Cookies">
+      <div class="card-content">
+        <span class="tag">Eggless</span>
+        <div class="card-title">
+          <span class="lang-en">Butter Cookies</span>
+          <span class="lang-hi">बटर कुकीज़</span>
+        </div>
+        <p class="lang-en">Rich butter taste that melts in your mouth.</p>
+        <p class="lang-hi">मक्खन का भरपूर स्वाद जो मुंह में घुल जाए।</p>
+      </div>
     </div>
 
-    <div class="info-item">
-      <span class="label">Website:</span>
-      fairtaste.in
-    </div>
-
-    <div class="info-item">
-      <span class="label">Contact:</span>
-      <a href="mailto:contact@fairtaste.in" style="color: #8b4513;">contact@fairtaste.in</a>
+    <div class="card">
+      <img src="suji_rusk.jpg" alt="Rusk">
+      <div class="card-content">
+        <span class="tag">Crunchy</span>
+        <div class="card-title">
+          <span class="lang-en">Suoji Rusk</span>
+          <span class="lang-hi">सूजी रस्क</span>
+        </div>
+        <p class="lang-en">Perfect companion for your evening tea.</p>
+        <p class="lang-hi">आपकी शाम की चाय का सही साथी।</p>
+      </div>
     </div>
   </div>
-</div>
+</section>
+
+<section class="about-section" id="contact">
+  <div class="about-container">
+    <img src="devesh.jpg" alt="Devesh Mishra" class="owner-photo">
+
+    <div class="about-text">
+      <h3>
+        <span class="lang-en">Devesh Mishra</span>
+        <span class="lang-hi">देवेश मिश्र</span>
+      </h3>
+
+      <p style="color: var(--accent); font-weight: bold; margin-bottom: 20px;">
+        <span class="lang-en">Founder, Fair Taste</span>
+        <span class="lang-hi">संस्थापक, फेयर टेस्ट</span>
+      </p>
+
+      <p>
+        <span class="lang-en">
+          "I founded Fair Taste with a clear vision—to bring the freshest, highest-quality bakery products to my hometown.
+          Every item is crafted with care, using premium ingredients and following strict hygiene standards, ensuring a taste
+          that is not only delicious but completely safe."
+        </span>
+
+        <span class="lang-hi">
+          "मैंने फेयर टेस्ट की स्थापना एक स्पष्ट उद्देश्य के साथ की—अपने गृहनगर तक सबसे ताज़ा और उच्च गुणवत्ता वाले बेकरी उत्पाद पहुँचाना।
+          हमारे प्रत्येक उत्पाद को बेहतरीन सामग्री और कड़े स्वच्छता मानकों के साथ तैयार किया जाता है, ताकि हर स्वाद सुरक्षित, शुद्ध और यादगार हो।"
+        </span>
+      </p>
+
+      <div style="margin-top: 30px; border-left: 4px solid var(--primary); padding-left: 20px;">
+        <p>
+          <strong>📍
+            <span class="lang-en">Factory:</span>
+            <span class="lang-hi">फैक्ट्री:</span>
+          </strong>
+          <span class="lang-en">Semra Tappa Haveli, Ambedkar Nagar, 224137</span>
+          <span class="lang-hi">सेमरा टप्पा हवेली, अम्बेडकर नगर, 224137</span>
+        </p>
+        <p><strong>📞 Contact-1:</strong> +91 7007286118</p>
+        <p><strong>📞 Contact-2:</strong> +91 9450943658</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <footer>
-  &copy; 2025 Fair Taste. All Rights Reserved.
+  <span class="footer-logo">Fair Taste</span>
+  <p>
+    <span class="lang-en">Quality Bakery Manufacturer since 2023.</span>
+    <span class="lang-hi">2023 से गुणवत्तापूर्ण बेकरी निर्माता।</span>
+  </p>
+  <div class="gst-box">GSTIN: 1257PQR25</div>
+  <p style="margin-top: 2rem; opacity: 0.5; font-size: 0.8rem;">&copy; 2025 Fair Taste. All Rights Reserved.</p>
 </footer>
 
+<script>
+        // MODIFICATION: Default to Hindi (True)
+        let isHindi = true;
+
+        // Ensure button text is correct on load
+        window.onload = function() {
+            const btnText = document.querySelector('.lang-text');
+            // If Hindi is default, the button should offer "English"
+            btnText.textContent = "English";
+        };
+
+        function toggleLanguage() {
+            isHindi = !isHindi;
+
+            const enElements = document.querySelectorAll('.lang-en');
+            const hiElements = document.querySelectorAll('.lang-hi');
+            const btnText = document.querySelector('.lang-text');
+
+            if (isHindi) {
+                // Show Hindi, Hide English
+                enElements.forEach(el => el.style.display = 'none');
+                hiElements.forEach(el => el.style.display = 'inline');
+                btnText.textContent = "English"; // Button offers switch TO English
+            } else {
+                // Show English, Hide Hindi
+                enElements.forEach(el => el.style.display = 'inline');
+                hiElements.forEach(el => el.style.display = 'none');
+                btnText.textContent = "हिन्दी"; // Button offers switch TO Hindi
+            }
+        }
+    </script>
 </body>
 </html>
