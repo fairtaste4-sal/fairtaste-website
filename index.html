@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
 
   <style>
-        /* --- 1. CONFIGURATION (CSS Variables) --- */
+        /* --- 1. CONFIGURATION --- */
         :root {
             --primary: #8B4513;        /* Saddle Brown */
             --primary-dark: #5e2c0b;
@@ -33,7 +33,7 @@
             background-color: var(--bg-body);
             color: var(--text-main);
             line-height: 1.6;
-            overflow-x: hidden; /* Prevent horizontal scroll on mobile */
+            overflow-x: hidden;
         }
         img { max-width: 100%; display: block; }
         a { text-decoration: none; color: inherit; }
@@ -44,7 +44,7 @@
         h2 { font-size: 2.2rem; margin-bottom: 1rem; text-align: center; }
         p { margin-bottom: 1rem; }
 
-        /* --- 4. NAVIGATION (Sticky & Glassy) --- */
+        /* --- 4. NAVIGATION --- */
         header {
             position: sticky;
             top: 0;
@@ -62,10 +62,6 @@
             align-items: center;
         }
         .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
-
-        .nav-links { display: flex; gap: 2rem; align-items: center; }
-        .nav-links a { font-weight: 600; color: var(--text-main); transition: var(--transition); }
-        .nav-links a:hover { color: var(--accent); }
 
         .btn-toggle {
             padding: 8px 16px;
@@ -100,11 +96,11 @@
         }
         .btn-cta:hover { transform: translateY(-3px); background-color: var(--primary); box-shadow: 0 15px 25px rgba(139, 69, 19, 0.4); }
 
-        /* --- 6. PRODUCT GRID (Responsive Magic) --- */
+        /* --- 6. PRODUCT GRID --- */
         .products { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Auto-scales */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
@@ -146,14 +142,15 @@
         .footer-logo { font-size: 2rem; font-weight: 700; color: white; margin-bottom: 1rem; display: block; }
         .gst-box { display: inline-block; border: 1px dashed #555; padding: 10px 20px; margin-top: 2rem; border-radius: 6px; }
 
-        /* --- 9. UTILITIES --- */
-        .lang-hi { display: none; } /* Hidden by default */
+        /* --- 9. UTILITIES (LANGUAGE CONTROLS) --- */
+        /* MODIFICATION: English hidden by default */
+        .lang-en { display: none; }
+        .lang-hi { display: inline; }
 
-        /* --- 10. MOBILE OPTIMIZATIONS --- */
+        /* Mobile Optimizations */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .about-container { flex-direction: column; text-align: center; }
-            .nav-links { display: none; } /* Hide standard nav on mobile (simplified) */
             .owner-photo { width: 180px; height: 180px; margin: 0 auto; }
         }
     </style>
@@ -164,7 +161,7 @@
   <nav>
     <div class="logo">Fair Taste</div>
     <button class="btn-toggle" onclick="toggleLanguage()" aria-label="Switch Language">
-      <span class="lang-text">हिन्दी</span>
+      <span class="lang-text">English</span>
     </button>
   </nav>
 </header>
@@ -233,7 +230,7 @@
 
 <section class="about-section" id="contact">
   <div class="about-container">
-    <img src="devesh.jpg" alt="devesh Mishra" class="owner-photo">
+    <img src="devesh.jpg" alt="Devesh Mishra" class="owner-photo">
 
     <div class="about-text">
       <h3>Devesh Mishra</h3>
@@ -262,25 +259,33 @@
 </footer>
 
 <script>
-        // State management
-        let isHindi = false;
+        // MODIFICATION: Default to Hindi (True)
+        let isHindi = true;
+
+        // Ensure button text is correct on load
+        window.onload = function() {
+            const btnText = document.querySelector('.lang-text');
+            // If Hindi is default, the button should offer "English"
+            btnText.textContent = "English";
+        };
 
         function toggleLanguage() {
             isHindi = !isHindi;
 
-            // Toggle Logic
             const enElements = document.querySelectorAll('.lang-en');
             const hiElements = document.querySelectorAll('.lang-hi');
             const btnText = document.querySelector('.lang-text');
 
             if (isHindi) {
+                // Show Hindi, Hide English
                 enElements.forEach(el => el.style.display = 'none');
                 hiElements.forEach(el => el.style.display = 'inline');
-                btnText.textContent = "English"; // Button shows what you CAN switch to
+                btnText.textContent = "English"; // Button offers switch TO English
             } else {
+                // Show English, Hide Hindi
                 enElements.forEach(el => el.style.display = 'inline');
                 hiElements.forEach(el => el.style.display = 'none');
-                btnText.textContent = "हिन्दी";
+                btnText.textContent = "हिन्दी"; // Button offers switch TO Hindi
             }
         }
     </script>
